@@ -1,4 +1,14 @@
+const User = require('../database/user');
+
+var userClass = new User();
+
+exports.get = (req, res, next) => {
+    userClass.selectAll('SELECT * FROM users', res);
+}
+
 exports.post = (req, res, next) => {
+    const {name, email} = req.body;
+    userClass.insertUser({name, email}, res);
     res.status(201).send('Requisição recebida com sucesso!');
 }
 
